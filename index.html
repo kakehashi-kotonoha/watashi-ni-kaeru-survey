@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>わたしに還るお茶会｜アンケート</title>
+<style>
+:root{--ink:#55372d;--muted:#8a746b;--cream:#fbf7f0;--paper:#fffdf9;--sage:#8c9a79;--rose:#b86a70;--line:#e9ddd0}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(#f8f1e8,#fffdf9);color:var(--ink);font-family:"Hiragino Mincho ProN","Yu Mincho",serif;line-height:1.8}
+.wrap{max-width:760px;margin:auto;padding:42px 18px 80px}.hero{text-align:center;padding:34px 16px 28px}.hero small{letter-spacing:.18em;color:var(--muted)}h1{font-size:clamp(30px,7vw,46px);font-weight:500;margin:8px 0}.lead{max-width:560px;margin:auto;color:#6f5a51}.card{background:rgba(255,255,255,.9);border:1px solid var(--line);border-radius:22px;padding:24px;margin:16px 0;box-shadow:0 10px 28px rgba(83,55,45,.05)}
+.num{font:italic 18px Georgia,serif;color:var(--rose);margin-right:8px}.q{font-size:17px;margin:0 0 15px}textarea{width:100%;min-height:120px;border:1px solid var(--line);border-radius:14px;padding:14px;font:inherit;background:#fff;resize:vertical;color:var(--ink)}
+label.option{display:block;border:1px solid var(--line);border-radius:13px;padding:11px 13px;margin:8px 0;background:#fff;cursor:pointer}input{accent-color:var(--rose);margin-right:9px}.submit{width:100%;border:0;border-radius:999px;padding:16px;background:var(--rose);color:white;font-size:16px;font-family:inherit;cursor:pointer;margin-top:20px}.thanks{display:none;text-align:center;padding:55px 18px}.thanks h2{font-weight:500;font-size:28px}.note{font-size:12px;color:var(--muted);margin-top:16px}footer{text-align:center;color:var(--muted);font-size:12px;margin-top:30px}
+</style>
+</head><body><main class="wrap"><section id="formView"><header class="hero"><small>PRIVATE SALON 椿</small><h1>🌺『わたしに還る』お茶会</h1><p class="lead">今日は来てくださってありがとうございました🌿<br>今日感じたことを、今のままの言葉で聞かせていただけたら嬉しいです。</p></header>
+<form id="survey">
+<div class="card"><p class="q"><span class="num">01</span>今日のお茶会で、心に残ったことや気づいたことはありましたか？</p><textarea name="q1" required></textarea></div>
+<div class="card"><p class="q"><span class="num">02</span>来たときと今で、気持ちや身体の感覚に何か変化はありますか？</p><textarea name="q2" required></textarea></div>
+<div class="card"><p class="q"><span class="num">03</span>今日の時間を過ごしてみて、感じたことを自由に聞かせてください♡</p><textarea name="q3" required></textarea></div>
+<div class="card"><p class="q"><span class="num">04</span>ご感想をSNSなどで紹介してもよいですか？</p>
+<label class="option"><input required type="radio" name="permission" value="匿名ならOK">匿名ならOK</label>
+<label class="option"><input type="radio" name="permission" value="確認してからならOK">確認してからならOK</label>
+<label class="option"><input type="radio" name="permission" value="掲載NG">掲載NG</label></div>
+<p class="note">※ GitHub Pagesだけでは回答を運営者へ送信できないため、公開前に送信先を設定してください。</p><button class="submit" type="submit">アンケートを送る</button>
+</form></section>
+<section id="thanks" class="thanks"><h2>ありがとうございました🌿</h2><p>今日の時間が、また自分に戻る小さなきっかけになりますように。</p></section><footer>わたしに還るお茶会｜プライベートサロン「椿」</footer></main>
+<script>
+const ENDPOINT=''; // Google Apps Script / Formspree 等の送信URLを設定
+survey.addEventListener('submit',async e=>{e.preventDefault();const fd=new FormData(survey);const data=Object.fromEntries(fd);data.submitted_at=new Date().toISOString();localStorage.setItem('watashiSurveyLast',JSON.stringify(data));
+if(ENDPOINT){try{const r=await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});if(!r.ok)throw Error();}catch(err){alert('送信できませんでした。通信環境をご確認ください。');return;}}
+formView.style.display='none';thanks.style.display='block';scrollTo({top:0,behavior:'smooth'});
+});
+</script></body></html>
