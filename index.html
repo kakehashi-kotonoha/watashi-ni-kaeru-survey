@@ -16,16 +16,35 @@ label.option{display:block;border:1px solid var(--line);border-radius:13px;paddi
 <div class="card"><p class="q"><span class="num">02</span>来たときと今で、気持ちや身体の感覚に何か変化はありますか？</p><textarea name="q2" required></textarea></div>
 <div class="card"><p class="q"><span class="num">03</span>今日の時間を過ごしてみて、感じたことを自由に聞かせてください♡</p><textarea name="q3" required></textarea></div>
 <div class="card"><p class="q"><span class="num">04</span>ご感想をSNSなどで紹介してもよいですか？</p>
-<label class="option"><input required type="radio" name="permission" value="匿名ならOK">匿名ならOK</label>
-<label class="option"><input type="radio" name="permission" value="確認してからならOK">確認してからならOK</label>
-<label class="option"><input type="radio" name="permission" value="掲載NG">掲載NG</label></div>
-<p class="note">※ GitHub Pagesだけでは回答を運営者へ送信できないため、公開前に送信先を設定してください。</p><button class="submit" type="submit">アンケートを送る</button>
+<label class="option"><input required type="radio" name="q4" value="匿名ならOK">匿名ならOK</label>
+<label class="option"><input type="radio" name="q4" value="確認してからならOK">確認してからならOK</label>
+<label class="option"><input type="radio" name="q4" value="掲載NG">掲載NG</label></div>
+<p class="note">ご回答はアンケート運営者へ送信されます。</p><button class="submit" type="submit">アンケートを送る</button>
 </form></section>
 <section id="thanks" class="thanks"><h2>ありがとうございました🌿</h2><p>今日の時間が、また自分に戻る小さなきっかけになりますように。</p></section><footer>わたしに還るお茶会｜プライベートサロン「椿」</footer></main>
 <script>
-const ENDPOINT=''; // Google Apps Script / Formspree 等の送信URLを設定
-survey.addEventListener('submit',async e=>{e.preventDefault();const fd=new FormData(survey);const data=Object.fromEntries(fd);data.submitted_at=new Date().toISOString();localStorage.setItem('watashiSurveyLast',JSON.stringify(data));
-if(ENDPOINT){try{const r=await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});if(!r.ok)throw Error();}catch(err){alert('送信できませんでした。通信環境をご確認ください。');return;}}
-formView.style.display='none';thanks.style.display='block';scrollTo({top:0,behavior:'smooth'});
+const ENDPOINT='https://script.google.com/macros/s/AKfycbzIBMAyyGKhBVeXAnuCIDPvTTnp9sMprSJ6ooYBAs9gkb7wzYnGueOSOi0Yqlpr4WioFA/exec';
+const form = document.getElementById('survey');
+const button = form.querySelector('.submit');
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const data = Object.fromEntries(new FormData(form));
+  button.disabled = true;
+  button.textContent = '送信中…';
+  try {
+    await fetch(ENDPOINT, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {'Content-Type': 'text/plain;charset=utf-8'},
+      body: JSON.stringify(data)
+    });
+    document.getElementById('formView').style.display='none';
+    document.getElementById('thanks').style.display='block';
+    window.scrollTo({top:0, behavior:'smooth'});
+  } catch (err) {
+    alert('送信できませんでした。通信環境をご確認のうえ、もう一度お試しください。');
+    button.disabled = false;
+    button.textContent = 'アンケートを送る';
+  }
 });
 </script></body></html>
