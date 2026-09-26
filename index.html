@@ -9,8 +9,26 @@
 .wrap{max-width:760px;margin:auto;padding:42px 18px 80px}.hero{text-align:center;padding:34px 16px 28px}.hero small{letter-spacing:.18em;color:var(--muted)}h1{font-size:clamp(30px,7vw,46px);font-weight:500;margin:8px 0}.lead{max-width:560px;margin:auto;color:#6f5a51}.card{background:rgba(255,255,255,.9);border:1px solid var(--line);border-radius:22px;padding:24px;margin:16px 0;box-shadow:0 10px 28px rgba(83,55,45,.05)}
 .num{font:italic 18px Georgia,serif;color:var(--rose);margin-right:8px}.q{font-size:17px;margin:0 0 15px}textarea{width:100%;min-height:120px;border:1px solid var(--line);border-radius:14px;padding:14px;font:inherit;background:#fff;resize:vertical;color:var(--ink)}
 label.option{display:block;border:1px solid var(--line);border-radius:13px;padding:11px 13px;margin:8px 0;background:#fff;cursor:pointer}input{accent-color:var(--rose);margin-right:9px}.submit{width:100%;border:0;border-radius:999px;padding:16px;background:var(--rose);color:white;font-size:16px;font-family:inherit;cursor:pointer;margin-top:20px}.thanks{display:none;text-align:center;padding:55px 18px}.thanks h2{font-weight:500;font-size:28px}.note{font-size:12px;color:var(--muted);margin-top:16px}footer{text-align:center;color:var(--muted);font-size:12px;margin-top:30px}
+
+/* スマホ表示の最適化 */
+.hero h1 .title-main,.hero h1 .title-tea{white-space:nowrap}
+@media (max-width:600px){
+  .wrap{padding:24px 14px 56px}
+  .hero{padding:24px 4px 20px}
+  h1{font-size:30px;line-height:1.45;margin:10px 0 14px}
+  .hero h1 .title-main,.hero h1 .title-tea{display:block}
+  .lead{font-size:14px;line-height:1.9;padding:0 4px}
+  .card{padding:20px 16px;margin:13px 0;border-radius:18px}
+  .q{font-size:16px;line-height:1.75}
+  .num{display:block;margin:0 0 5px;font-size:17px}
+  textarea{min-height:110px;font-size:16px;padding:13px}
+  label.option{font-size:15px;padding:13px}
+  .submit{font-size:16px;padding:16px}
+  .thanks{padding:44px 10px}
+  .thanks h2{font-size:25px}
+}
 </style>
-</head><body><main class="wrap"><section id="formView"><header class="hero"><small>PRIVATE SALON 椿</small><h1>🌺『わたしに還る』お茶会</h1><p class="lead">今日は来てくださってありがとうございました🌿<br>今日感じたことを、今のままの言葉で聞かせていただけたら嬉しいです。</p></header>
+</head><body><main class="wrap"><section id="formView"><header class="hero"><small>PRIVATE SALON 椿</small><h1>🌺<span class="title-main">『わたしに還る』</span><span class="title-tea">お茶会</span></h1><p class="lead">今日は来てくださってありがとうございました🌿<br>今日感じたことを、今のままの言葉で聞かせていただけたら嬉しいです。</p></header>
 <form id="survey">
 <div class="card"><p class="q"><span class="num">01</span>今日のお茶会で、心に残ったことや気づいたことはありましたか？</p><textarea name="q1" required></textarea></div>
 <div class="card"><p class="q"><span class="num">02</span>来たときと今で、気持ちや身体の感覚に何か変化はありますか？</p><textarea name="q2" required></textarea></div>
